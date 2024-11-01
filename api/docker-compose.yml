@@ -1,0 +1,18 @@
+services:
+  db:
+    image: 'postgres:16-alpine'
+    environment:
+      - 'POSTGRES_DB=testdb'
+      - 'POSTGRES_PASSWORD=passdb'
+      - 'POSTGRES_USER=testuser'
+    volumes:
+      - db:/data/db
+ 
+  api:
+    image: 'techtest-api'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+volumes:
+  db:
